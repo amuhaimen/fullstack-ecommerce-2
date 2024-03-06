@@ -5,14 +5,15 @@ import axios from "axios";
 
 const AddSubCategory = () => {
   let [data, setData] = useState([]);
+  let [id, setId] = useState("");
   // const data = useSelector((state) => state.activeUser.value);
   const onFinish = async (values) => {
-    console.log("Success:", values, data.id);
+    console.log("Success:", values, id);
     let response = await axios.post(
       "http://localhost:8000/api/v1/product/createsubcategory",
       {
         name: values.subcategoryname,
-        // categoryId: data.id,
+        categoryId: id,
       }
     );
     console.log(response);
@@ -23,6 +24,7 @@ const AddSubCategory = () => {
 
   const handleChange = (value) => {
     console.log(`selected ${value}`);
+    setId(value);
   };
 
   useEffect(() => {
@@ -63,6 +65,7 @@ const AddSubCategory = () => {
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
+      <h1>Add Sub Category</h1>
       <Form.Item
         label="Sub Category Name"
         name="subcategoryname"

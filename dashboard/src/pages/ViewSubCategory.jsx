@@ -68,9 +68,9 @@ const ViewSubCategory = () => {
     },
 
     {
-      title: "Active",
-      dataIndex: "active",
-      key: "active",
+      title: "Category",
+      dataIndex: "category",
+      key: "category",
     },
     {
       title: "Action",
@@ -106,11 +106,12 @@ const ViewSubCategory = () => {
       let data = await axios.get(
         "http://localhost:8000/api/v1/product/allsubcategory"
       );
-
+      // console.log(data.data[0].categoryId.name);
       data.data.map((item) => {
         arr.push({
           key: item._id,
           name: item.name,
+          category: data.data[0].categoryId.name,
           active: item.isActive ? "Approved" : "Pending",
         });
       });
