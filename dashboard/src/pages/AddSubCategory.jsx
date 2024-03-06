@@ -65,7 +65,7 @@ const AddSubCategory = () => {
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
-      <h1>Add Sub Category</h1>
+      <h1>Sub Category Name</h1>
       <Form.Item
         label="Sub Category Name"
         name="subcategoryname"

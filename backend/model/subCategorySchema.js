@@ -10,6 +10,10 @@ const subCategorySchema = new Schema({
     type: mongoose.Types.ObjectId,
     ref: "Category",
   },
+  isActive: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = mongoose.model("SubCategory", subCategorySchema);

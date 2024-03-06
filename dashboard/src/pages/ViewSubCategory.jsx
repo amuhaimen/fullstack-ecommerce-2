@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Button, Space, Table, Tag, Modal, Form, Input } from "antd";
+import { useSelector } from "react-redux";
 
 const ViewSubCategory = () => {
   let [data, setData] = useState([]);
@@ -10,6 +11,7 @@ const ViewSubCategory = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editId, setEditId] = useState(false);
+  const userData = useSelector((state) => state.activeUser.value);
 
   const showModal = (id) => {
     console.log("edit Id:", id);
@@ -25,7 +27,7 @@ const ViewSubCategory = () => {
     setIsModalOpen(false);
   };
 
-  //delete category
+  //delete sub category
   let handleDelete = async (id) => {
     setLoading(id);
     let data = await axios.post(
@@ -40,7 +42,7 @@ const ViewSubCategory = () => {
     setLoading("");
   };
 
-  //edit category
+  //edit sub category
   const onFinishModal = async (values) => {
     console.log("Success Modal:", values, data.editId);
     let response = await axios.post(
@@ -66,27 +68,34 @@ const ViewSubCategory = () => {
       dataIndex: "name",
       key: "name",
     },
-
     {
       title: "Category",
       dataIndex: "category",
       key: "category",
     },
     {
+      title: "Active",
+      dataIndex: "active",
+      key: "active",
+    },
+    {
       title: "Action",
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Button type="primary" onClick={() => showModal(record.key)}>
-            Edit{" "}
-          </Button>
+          {userData.role == "Merchent" && (
+            <Button type="primary" onClick={() => showModal(record.key)}>
+              Edit
+            </Button>
+          )}
           <Button
             danger
             onClick={() => handleDelete(record.key)}
             loading={loading == record.key ? true : false}
           >
-            Delete{" "}
+            Delete
           </Button>
+          {userData.role == "Admin" && <Button>Approve</Button>}
         </Space>
       ),
     },
@@ -111,7 +120,7 @@ const ViewSubCategory = () => {
         arr.push({
           key: item._id,
           name: item.name,
-          category: data.data[0].categoryId.name,
+          category: item.categoryId.name,
           active: item.isActive ? "Approved" : "Pending",
         });
       });
@@ -150,7 +159,7 @@ const ViewSubCategory = () => {
           autoComplete="off"
         >
           <Form.Item
-            label="Category Name"
+            label="Sub Category Name"
             name="categoryname"
             rules={[
               {

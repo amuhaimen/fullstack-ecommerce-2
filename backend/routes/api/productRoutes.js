@@ -8,6 +8,7 @@ const editCategoryController = require("../../controllers/editCategoryController
 const allSubcategoryController = require("../../controllers/allSubCategoryController");
 const deleteSubCategoryController = require("../../controllers/deleteSubCategoryController");
 const editSubCategoryController = require("../../controllers/editSubCategoryController");
+const approvecategoryController = require("../../controllers/approveCategoryController");
 
 _.post("/createcategory", categoryController);
 _.get("/allcategory", allcategoryController);
@@ -20,5 +21,6 @@ _.post("/deletecategory", deleteCategoryController);
 _.post("/deletesubcategory", deleteSubCategoryController);
 _.post("/editcategory", editCategoryController);
 _.post("/editsubcategory", editSubCategoryController);
+_.post("/approvecategory", approvecategoryController);
 
 module.exports = _;
