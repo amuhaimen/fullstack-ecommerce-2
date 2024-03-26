@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 
 const UserList = () => {
-  let [userlist, setuserlist] = useState([]);
+  let [userList, setUserList] = useState([]);
   let [userName, setUserName] = useState([]);
 
   const columns = [
@@ -53,11 +53,19 @@ const UserList = () => {
 
   useEffect(() => {
     let username = [];
+    let userlist = [];
     async function user() {
       let userData = await axios.get(
         "http://localhost:8000/api/v1/auth/alluser"
       );
-      setuserlist(userData.data);
+      userData.data.map((item) => {
+        if (item.role == "User") {
+          userlist.push({
+            ...item,
+          });
+        }
+      });
+      setUserList(userlist);
       userData.data.map((item) => {
         username.push({
           text: item.name,
@@ -75,11 +83,11 @@ const UserList = () => {
 
   return (
     <>
-      {/* {userlist.map((item, index) => (
+      {/* {userList.map((item, index) => (
         <h1 key={index}>{item.name}</h1>
       ))} */}
 
-      <Table columns={columns} dataSource={userlist} onChange={onChange} />
+      <Table columns={columns} dataSource={userList} onChange={onChange} />
     </>
   );
 };

@@ -16,7 +16,7 @@ const ViewCategory = () => {
   const userData = useSelector((state) => state.activeUser.value);
   //============================= all variable item end ==========================
 
-  // ============================== action by clicking start ===========================
+  // ======================== action by clicking start ===================
   const showModal = (id) => {
     console.log("edit Id:", id);
     setEditId(id);

@@ -25,7 +25,7 @@ const Home = () => {
   const items = [
     data.role == "Admin" &&
       getItem("Users", "sub1", <MailOutlined />, [
-        getItem("Merchant", "/home/userlist"),
+        getItem("Merchent", "/home/userlist"),
         getItem("Users", "2"),
       ]),
     getItem("Product", "sub2", <AppstoreOutlined />, [
